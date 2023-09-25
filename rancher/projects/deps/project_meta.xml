@@ -1,0 +1,16 @@
+<project name="home:gmacedo:rancher:deps">
+  <title>Rancher depedencies</title>
+  <description>This project hosts the build pipeline of RPM packages of Rancher's dependencies.</description>
+  <url>https://github.com/macedogm/rancher-rpm-dependencies</url>
+  <person userid="gmacedo" role="maintainer"/>
+  <repository name="openSUSE_Tumbleweed">
+    <path project="openSUSE:Factory" repository="snapshot"/>
+    <arch>x86_64</arch>
+    <arch>aarch64</arch>
+  </repository>
+  <repository name="15.5">
+    <path project="openSUSE:Leap:15.5" repository="standard"/>
+    <arch>x86_64</arch>
+    <arch>aarch64</arch>
+  </repository>
+</project>

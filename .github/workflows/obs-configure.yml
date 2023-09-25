@@ -1,0 +1,32 @@
+name: obs-configure
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    container: registry.opensuse.org/opensuse/tumbleweed:latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install OSC
+        run: zypper in -y osc
+
+      - name: Configure OSC
+        env:
+          OBS_USER: ${{ secrets.OBS_USER }}
+          OBS_PASS: ${{ secrets.OBS_PASS }}
+        run: |
+          sed "s/OBS_USER/$OBS_USER/;s/OBS_PASS/$OBS_PASS/" rancher/oscrc > .oscrc
+          osc --config .oscrc init "home:gmacedo:rancher"
+
+      - name: Creating/Updating projects
+        run: ./scripts/manage_projects.sh
+
+      - name: Removing OSC config
+        run: |
+          rm -rf .oscrc .osc

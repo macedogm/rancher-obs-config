@@ -28,5 +28,4 @@ jobs:
         run: ./scripts/manage_projects.sh
 
       - name: Removing OSC config
-        run: |
-          rm -rf .oscrc .osc
+        run: rm -rf .oscrc .osc
